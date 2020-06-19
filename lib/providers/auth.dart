@@ -24,6 +24,22 @@ class Auth with ChangeNotifier {
     return null;
   }
 
+  String get userID {
+    if(_user != null) {
+      return _user.id;
+    }
+
+    return '';
+  }
+
+  String get userEmail {
+    if(_user != null) {
+      return _user.email;
+    }
+
+    return '';
+  }
+
   Future<void> signUp(String email, String password) async {
     const url = 'http://192.168.0.55:12345/user/guest/register';
     try {
@@ -57,7 +73,7 @@ class Auth with ChangeNotifier {
       );
       print(email);
       final responseData = json.decode(response.body);
-      print(responseData);
+      print(responseData['payload']['user']);
 
       if(responseData['error_code'] != null) {
         throw HttpException(responseData['error_message']);

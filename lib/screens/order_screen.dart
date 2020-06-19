@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:guest_fyp_app/providers/auth.dart';
 import 'package:guest_fyp_app/providers/order_provider.dart' show OrderProvider;
 import 'package:guest_fyp_app/providers/orders_provider.dart';
 import 'package:guest_fyp_app/widgets/order_item.dart';
@@ -86,9 +87,10 @@ class _OrderButtonState extends State<OrderButton> {
         setState(() {
           _isLoading = true;
         });
+        final userID = Provider.of<Auth>(context, listen: false).userID;
         await Provider.of<OrdersProvider>(context, listen: false)
             .addOrder(widget.orderCart.getOrderItems.values.toList(),
-                widget.orderCart.totalAmount);
+                widget.orderCart.totalAmount, userID);
         widget.orderCart.clear();
         setState(() {
           _isLoading = false;

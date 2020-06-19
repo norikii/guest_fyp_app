@@ -20,11 +20,21 @@ class LoginScreen extends StatelessWidget {
       body: Stack(
         children: <Widget>[
           Container(
+            padding: const EdgeInsets.only(top: 50),
+            margin: const EdgeInsets.all(50),
+            child: Image(
+                image: AssetImage('assets/images/p1.png')
+            ),
+          ),
+          Container(
             decoration: BoxDecoration(
               gradient: LinearGradient(
                 colors: [
-                  Color.fromRGBO(215, 117, 255, 1).withOpacity(0.5),
-                  Color.fromRGBO(255, 188, 117, 1).withOpacity(0.9),
+                  Colors.white.withOpacity(0.5),
+                  Colors.black.withOpacity(0.9),
+//                  Color.fromRGBO(255, 188, 117, 1).withOpacity(0.9),
+//                  Color.fromRGBO(215, 117, 255, 1).withOpacity(0.5),
+//                  Color.fromRGBO(255, 188, 117, 1).withOpacity(0.9),
                 ],
                 begin: Alignment.topLeft,
                 end: Alignment.bottomRight,

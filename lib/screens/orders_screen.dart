@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:guest_fyp_app/providers/auth.dart';
 import 'package:guest_fyp_app/providers/orders_provider.dart' show OrdersProvider;
 import 'package:guest_fyp_app/widgets/main_drawer.dart';
 import 'package:provider/provider.dart';
@@ -29,6 +30,7 @@ class _OrdersScreenState extends State<OrdersScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final user = Provider.of<Auth>(context, listen: false).userID;
     final ordersData = Provider.of<OrdersProvider>(context);
     return Scaffold(
       appBar: AppBar(
@@ -36,8 +38,8 @@ class _OrdersScreenState extends State<OrdersScreen> {
       ),
       drawer: MainDrawer(),
       body: _isLoading ? Center(child: CircularProgressIndicator(),) : ListView.builder(
-        itemBuilder: (ctx, i) => OrdersItem(ordersData.getOrders[i]),
-        itemCount: ordersData.getOrders.length,
+        itemBuilder: (ctx, i) => OrdersItem(ordersData.ordersByUserID(user)[i]),
+        itemCount: ordersData.ordersByUserID(user).length,
       ),
     );
   }

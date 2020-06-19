@@ -8,9 +8,10 @@ class OrdersItem {
   final String id;
   final double amount;
   final List<dynamic> items;
+  final String userId;
   final DateTime createdAt;
 
-  OrdersItem({this.id, this.amount, this.items, this.createdAt});
+  OrdersItem({this.id, this.amount, this.items, this.userId, this.createdAt});
 }
 
 class OrdersProvider with ChangeNotifier {
@@ -21,6 +22,14 @@ class OrdersProvider with ChangeNotifier {
   List<OrdersItem> get getOrders {
     // copy of the list
     return [..._orders];
+  }
+
+  List<OrdersItem> ordersByUserID(String userID) {
+    if (userID == '') {
+
+    }
+
+    return _orders.where((order) => order.userId == userID).toList();
   }
 
   OrdersProvider(this.authToken, this._orders);
@@ -55,6 +64,7 @@ class OrdersProvider with ChangeNotifier {
               id: order['_id'],
               amount: order['total_price'].toDouble(),
               items: order['items'],
+              userId: order['guest_user_id'],
               createdAt: convertUnix(order['created_at'])
             )
           );
@@ -73,7 +83,7 @@ class OrdersProvider with ChangeNotifier {
 
   }
 
-  Future<void> addOrder(List<CartItem> cartItems, double total) async {
+  Future<void> addOrder(List<CartItem> cartItems, double total, String userID) async {
     const url = 'http://192.168.0.55:12345/auth/order';
     final headers = {
       'Content-Type': 'application/json',
@@ -90,6 +100,7 @@ class OrdersProvider with ChangeNotifier {
                     'item_price': cp.price,
                   })
               .toList(),
+          'guest_user_id': userID,
           'total_price': total,
         }),
         headers: headers

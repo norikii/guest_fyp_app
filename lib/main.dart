@@ -68,32 +68,9 @@ class MyApp extends StatelessWidget {
                 },
                 // this route is reached if a flutter failed to reach a screen
                 // which is registered its like 404 page
-//      onUnknownRoute: (settings) {
-//        return Route()
-//      },
+
               )),
     );
   }
 }
-//  List<Item> _availableItems = DUMMY_MEALS;
-//
-//  void _setFilters(Map<String, bool> filterData) {
-//    setState(() {
-//      _filters = filterData;
-//
-//      _availableItems = DUMMY_MEALS.where((item) {
-//        if(_filters['gluten'] && !item.isGlutenFree) {
-//          return false;
-//        }
-//        if(_filters['lactose'] && !item.isLactoseFree) {
-//          return false;
-//        }
-//        if(_filters['vegan'] && !item.isVegan) {
-//          return false;
-//        }
-//        if(_filters['vegetarian'] && !item.isVegetarian) {
-//          return false;
-//        }
-//        return true;
-//      }).toList();
-//    });
+
